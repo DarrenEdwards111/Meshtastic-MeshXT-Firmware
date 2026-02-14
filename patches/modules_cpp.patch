@@ -1,0 +1,18 @@
+--- a/src/modules/Modules.cpp
++++ b/src/modules/Modules.cpp
+@@ -28,6 +28,7 @@
+ #include "Telemetry/DeviceTelemetry.h"
+ #include "TraceRouteModule.h"
+ #include "WaypointModule.h"
++#include "MeshXTModule.h"
+ #ifdef ARCH_ESP32
+ #include "AudioModule.h"
+ #if defined(HAS_SCREEN)
+@@ -100,6 +101,7 @@ void setupModules()
+     new WaypointModule();
+     new TextMessageModule();
+     new NodeInfoModule();
++    new MeshXTModule();
+     // Note: if the rest of meshtastic-firmware is not available it will not compile.
+ #if HAS_TELEMETRY
+     new DeviceTelemetryModule();

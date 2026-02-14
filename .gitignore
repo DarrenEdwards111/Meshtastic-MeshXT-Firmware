@@ -1,0 +1,8 @@
+firmware/
+.pio/
+.vscode/
+*.o
+*.obj
+*.elf
+*.bin
+*.hex
