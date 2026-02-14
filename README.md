@@ -39,21 +39,47 @@ See [docs/SUPPORTED_DEVICES.md](docs/SUPPORTED_DEVICES.md) for the full list.
 
 ---
 
-## Quick Start
+## Quick Start — Heltec V3
+
+The most common device. Plug in USB-C and run four commands:
 
 ```bash
-# 1. Clone this repo
+# Install PlatformIO (if you haven't already)
+pip install platformio
+
+# Clone this repo
 git clone https://github.com/DarrenEdwards111/Meshtastic-MeshXT-Firmware.git
 cd Meshtastic-MeshXT-Firmware
 
-# 2. Run the setup script (clones Meshtastic firmware, copies MeshXT files, applies patches)
+# Run setup (clones Meshtastic v2.5.6.0, copies MeshXT modules, applies patch)
 bash scripts/setup.sh
 
-# 3. Flash your device (replace with your board)
-bash scripts/flash.sh tbeam
+# Plug in your Heltec V3 via USB-C, then flash
+bash scripts/flash.sh heltec-v3
 ```
 
-That's it. Your device is now running Meshtastic with MeshXT.
+That's it. Your Heltec is now running Meshtastic with MeshXT compression + error correction on every message.
+
+## Quick Start — Other Devices
+
+Same process, just change the board target:
+
+```bash
+git clone https://github.com/DarrenEdwards111/Meshtastic-MeshXT-Firmware.git
+cd Meshtastic-MeshXT-Firmware
+bash scripts/setup.sh
+
+# Pick your board:
+bash scripts/flash.sh tbeam          # LilyGO T-Beam
+bash scripts/flash.sh heltec-v3      # Heltec V3
+bash scripts/flash.sh tlora-v2-1-1_6 # LilyGO T-LoRa
+bash scripts/flash.sh tbeam-s3-core  # T-Beam S3
+bash scripts/flash.sh rak4631        # RAK WisBlock (nRF52)
+bash scripts/flash.sh t-echo         # LilyGO T-Echo (nRF52)
+bash scripts/flash.sh t-deck         # LilyGO T-Deck
+```
+
+Run `bash scripts/flash.sh` with no arguments to see all supported boards.
 
 ## Manual Install
 
