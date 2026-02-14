@@ -1,0 +1,10 @@
+--- a/src/mesh/Router.cpp
++++ b/src/mesh/Router.cpp
+@@ -1,5 +1,7 @@
+ #include "Router.h"
+ #include "configuration.h"
++#include "modules/MeshXTModule.h"
++extern MeshXTModule *meshXTModule;
+ 
+ // Add MeshXT send hook to Router::send()
+ // This patch adds 3 lines to the beginning of Router::send() method,

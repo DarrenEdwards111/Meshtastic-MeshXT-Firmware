@@ -59,6 +59,30 @@ else
 fi
 cd "$PROJECT_DIR"
 
+# Step 4: Patch Router.cpp to intercept outgoing text messages
+echo "→ Patching Router.cpp for MeshXT send interception..."
+cd "$FIRMWARE_DIR"
+ROUTER_FILE="src/mesh/Router.cpp"
+if grep -q "MeshXTModule" "$ROUTER_FILE" 2>/dev/null; then
+    echo "✓ Router.cpp already patched."
+else
+    # Add #include at the top (after existing includes)
+    sed -i '/#include "Router.h"/a #include "modules/MeshXTModule.h"\nextern MeshXTModule *meshXTModule;' "$ROUTER_FILE"
+
+    # Add intercept call at the start of Router::send()
+    # Find "ErrorCode Router::send" and add the hook after the opening brace
+    sed -i '/ErrorCode Router::send/,/{/ {
+        /{/ a\
+\    // MeshXT: intercept outgoing text messages and compress them\
+\    if (meshXTModule && p->decoded.portnum == meshtastic_PortNum_TEXT_MESSAGE_APP) {\
+\        meshXTModule->interceptTextMessage(p);\
+\    }
+    }' "$ROUTER_FILE"
+
+    echo "✓ Router.cpp patched — outgoing text messages will be auto-compressed."
+fi
+cd "$PROJECT_DIR"
+
 echo ""
 echo "=== Setup Complete ==="
 echo ""
