@@ -16,6 +16,17 @@ Extend your mesh network's effective range by compressing messages with Smaz sho
 | **Reed-Solomon FEC** | Corrects bit errors in received packets. Three levels: Low (8 errors), Medium (16), High (32). |
 | **Compact Framing** | 2-byte header encodes version, compression type, FEC level, and flags. |
 | **Backward Compatible** | Uses `PRIVATE_APP` portnum — standard Meshtastic nodes simply ignore MeshXT packets. |
+| **Fully Transparent** | Works with the standard Meshtastic app (Android/iOS). No special app needed. |
+
+## How It Works with the Meshtastic App
+
+MeshXT is completely invisible to you. Flash your device, open the Meshtastic app, send messages as normal.
+
+**Sending:** When you type a message in the app, MeshXT automatically intercepts it before transmission, compresses the text with Smaz, adds Reed-Solomon error correction, and sends the smaller, protected packet over the air.
+
+**Receiving:** When a MeshXT packet arrives from another device, the module automatically decodes and decompresses it, then surfaces it in your Meshtastic app as a normal text message.
+
+You never see the compression happening. The app shows regular text messages. The radio sends smaller, error-corrected packets. Both devices need MeshXT flashed for the benefits — standard Meshtastic nodes on the network still work fine alongside MeshXT nodes.
 
 ## Supported Devices
 
