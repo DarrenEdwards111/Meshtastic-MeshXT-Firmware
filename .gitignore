@@ -6,3 +6,10 @@ firmware/
 *.elf
 *.bin
 *.hex
+.npmrc
+.env
+secrets/
+.keys/
+*.key
+*.pem
+*.der
